@@ -1,15 +1,13 @@
 package com.timeplanner.dev.global.security.jwt;
 
-import com.wos.chw.global.security.jwt.enumerated.TokenType;
+import com.timeplanner.dev.global.security.jwt.enumerated.TokenType;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -17,7 +15,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -32,18 +29,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             log.debug("JwtAuthenticationFilter.");
             String accessToken = resolveToken(request);
 
-            AbstractAuthenticationToken authentication = new AnonymousAuthenticationToken(
-                    "anonymous", Optional.empty(), Collections.singletonList(new SimpleGrantedAuthority("anonymous"))
-            );
-
             if (StringUtils.hasText(accessToken) && jwtTokenProvider.validateAccessToken(accessToken)) {
-                authentication = (AbstractAuthenticationToken) jwtTokenProvider.getAuthentication(accessToken, TokenType.ACCESS_TOKEN.getValue());
-            }
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        jwtTokenProvider.getAuthentication(accessToken, TokenType.ACCESS_TOKEN.getValue()), null, Collections.emptyList()
+                );
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         } catch (Exception e) {
             log.error("{}: {}", "토큰 인증 실패", e.getMessage());
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
             return;
         }
 

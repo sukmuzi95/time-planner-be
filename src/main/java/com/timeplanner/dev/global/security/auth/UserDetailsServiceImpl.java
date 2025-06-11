@@ -1,6 +1,7 @@
 package com.timeplanner.dev.global.security.auth;
 
 import com.timeplanner.dev.domain.user.entity.User;
+import com.timeplanner.dev.domain.user.repository.UserRepository;
 import com.timeplanner.dev.global.exception.ApiException;
 import com.timeplanner.dev.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +16,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String mid) throws UsernameNotFoundException {
-        log.debug("loadUserByUsername() mid: {}", mid);
-        User user = memberRepository.findByMid(mid)
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        log.debug("loadUserByUsername() email: {}", email);
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> ApiException.builder()
                         .errorCode(ErrorCode.NOT_FOUND_USER)
                         .build());

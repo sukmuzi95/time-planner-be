@@ -21,6 +21,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.util.Collections;
 import java.util.Date;
 import java.util.stream.Collectors;
 
@@ -52,8 +53,6 @@ public class JwtTokenProvider {
     }
 
     public String generateRefreshToken(Authentication authentication) {
-//        Date expiryDate = this.createExpiryDate(accessTokenExpiration);
-
         return this.createRefreshToken(authentication, refreshTokenExpiration);
     }
 
@@ -62,19 +61,13 @@ public class JwtTokenProvider {
     }
 
     public String createRefreshToken(Authentication authentication, long tokenExpiryDate) {
-        //        Date expiryDate = this.createExpiryDate(refreshTokenExpiration);
-//        this.tokenService.createRefreshToken(token, expiryDate, authentication);
-
         return this.createToken(authentication, tokenExpiryDate, refreshTokenSecretKey);
     }
 
     public String createToken(Authentication authentication, long tokenExpiryDate, String secretKey) {
-        String role = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
 
         return Jwts.builder()
-                .claim("auth", role)
+//                .claim("auth", role)
                 .subject(authentication.getName())
                 .issuedAt(new Date())
                 .expiration(createExpiryDate(tokenExpiryDate))
@@ -90,7 +83,7 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(tokenSecret));
     }
 
-    public String getMidFromToken(String token, String type) {
+    public String getEmailFromToken(String token, String type) {
         String secretKey = type.equals(TokenType.ACCESS_TOKEN.getValue()) ? accessTokenSecretKey : refreshTokenSecretKey;
 
         return Jwts.parser()
@@ -102,8 +95,8 @@ public class JwtTokenProvider {
     }
 
     public Authentication getAuthentication(String token, String type) {
-        UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(getMidFromToken(token, type));
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(getEmailFromToken(token, type));
+        return new UsernamePasswordAuthenticationToken(userDetails, null, Collections.emptyList());
     }
 
     public boolean validateAccessToken(String token) {
