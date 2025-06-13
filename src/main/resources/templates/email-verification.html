@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>이메일 인증</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        /* 기본 스타일 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 32px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .header {
+            background-color: #4F46E5;
+            padding: 24px;
+            text-align: center;
+        }
+        .header h1 {
+            color: white;
+            margin: 0;
+            font-size: 22px;
+        }
+        .content {
+            padding: 32px 24px;
+            font-size: 16px;
+            color: #333333;
+        }
+        .code-box {
+            margin: 32px auto;
+            text-align: center;
+        }
+        .code {
+            display: inline-block;
+            background-color: #eef2ff;
+            color: #4F46E5;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            padding: 16px 32px;
+            border-radius: 10px;
+        }
+        .footer {
+            background-color: #f9fafb;
+            padding: 16px;
+            text-align: center;
+            font-size: 12px;
+            color: #888888;
+        }
+
+        /* 반응형 */
+        @media (max-width: 600px) {
+            .content {
+                padding: 24px 16px;
+                font-size: 15px;
+            }
+            .code {
+                font-size: 24px;
+                padding: 12px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 헤더 -->
+    <div class="header">
+        <h1>📮 TimePlanner 이메일 인증</h1>
+    </div>
+
+    <!-- 본문 -->
+    <div class="content">
+        <p>
+            안녕하세요 👋<br>
+            아래 인증코드를 TimePlanner 앱 또는 웹사이트에 입력해 주세요.
+        </p>
+
+        <div class="code-box">
+            <span class="code" th:text="${code}">AB12CD</span>
+        </div>
+
+        <p style="font-size: 14px; color: #666; text-align: center;">
+            인증코드는 <strong>5분간 유효</strong>하며,<br/> 타인에게 공유하지 마세요.
+        </p>
+    </div>
+
+    <!-- 푸터 -->
+    <div class="footer">
+        ⓒ 2025 TimePlanner. All rights reserved.
+    </div>
+</div>
+</body>
+</html>

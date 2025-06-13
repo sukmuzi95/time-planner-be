@@ -10,4 +10,8 @@ public interface AuthService {
     UserLoginResponse login(UserLoginRequest request, HttpServletResponse response);
 
     JwtResponse reissueToken(String requestRefreshToken);
+
+    void sendVerificationCode(String email);
+
+    boolean verifyCode(String email, String code);
 }

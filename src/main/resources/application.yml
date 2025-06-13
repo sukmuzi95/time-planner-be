@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: tpapp
+
+  config:
+    import:
+      - optional:classpath:yaml/application-db.yml
+      - optional:classpath:yaml/application-log.yml
+      - optional:classpath:yaml/application-secret.yml
+      - optional:classpath:yaml/application-redis.yml
+      - optional:classpath:yaml/application-mail.yml
