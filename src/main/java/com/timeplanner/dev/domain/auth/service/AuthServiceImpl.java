@@ -45,8 +45,8 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     public UserLoginResponse login(UserLoginRequest request, HttpServletResponse response) {
         try {
-            log.debug("AuthServiceImpl login() request email: {}, password: {}", request.getEmail(), request.getPassword());
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
+            log.debug("AuthServiceImpl login() request email: {}, password: {}", request.email(), request.password());
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(request.email(), request.password());
             Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
             JwtResponse jwtResponse = jwtTokenProvider.generateAccessToken(authentication);
             String refreshToken = jwtTokenProvider.generateRefreshToken(authentication);
@@ -55,7 +55,7 @@ public class AuthServiceImpl implements AuthService {
 
             response.addHeader("Set-Cookie", refreshCookie.toString());
 
-            UserResponse userResponse = UserResponse.of(userService.getUser(request.getEmail()));
+            UserResponse userResponse = UserResponse.of(userService.getUser(request.email()));
 
             return UserLoginResponse.builder()
                     .user(userResponse)

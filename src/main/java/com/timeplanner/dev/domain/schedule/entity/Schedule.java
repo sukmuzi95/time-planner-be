@@ -2,9 +2,7 @@ package com.timeplanner.dev.domain.schedule.entity;
 
 import com.timeplanner.dev.domain.user.entity.User;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,7 +11,9 @@ import java.util.List;
 @Entity
 @Table(name = "schedule")
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Schedule {
 
     @Id
@@ -33,7 +33,7 @@ public class Schedule {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "repeat_option_id")
     private RepeatOption repeatOption;
 

@@ -96,7 +96,7 @@ public class JwtTokenProvider {
 
     public Authentication getAuthentication(String token, String type) {
         UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(getEmailFromToken(token, type));
-        return new UsernamePasswordAuthenticationToken(userDetails, null, Collections.emptyList());
+        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 
     public boolean validateAccessToken(String token) {

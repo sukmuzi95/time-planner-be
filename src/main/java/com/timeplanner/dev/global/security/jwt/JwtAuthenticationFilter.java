@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -30,11 +31,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String accessToken = resolveToken(request);
 
             if (StringUtils.hasText(accessToken) && jwtTokenProvider.validateAccessToken(accessToken)) {
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        jwtTokenProvider.getAuthentication(accessToken, TokenType.ACCESS_TOKEN.getValue()), null, Collections.emptyList()
-                );
-
+                Authentication authentication = jwtTokenProvider.getAuthentication(accessToken, TokenType.ACCESS_TOKEN.getValue());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+
             }
         } catch (Exception e) {
             log.error("{}: {}", "토큰 인증 실패", e.getMessage());

@@ -1,0 +1,47 @@
+package com.timeplanner.dev.domain.schedule.dto;
+
+import com.timeplanner.dev.domain.schedule.entity.RepeatOption;
+import com.timeplanner.dev.domain.schedule.entity.Schedule;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Builder
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+public class ScheduleResponse {
+    private Long id;
+    private String title;
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
+    private RepeatOptionResponse repeatOption;
+
+    public static ScheduleResponse from(Schedule schedule) {
+        return ScheduleResponse.builder()
+                .id(schedule.getId())
+                .title(schedule.getTitle())
+                .startDateTime(schedule.getStartDatetime())
+                .endDateTime(schedule.getEndDatetime())
+                .repeatOption(schedule.getRepeatOption() != null
+                        ? RepeatOptionResponse.from(schedule.getRepeatOption())
+                        : null)
+                .build();
+    }
+
+    @Getter
+    @Builder
+    public static class RepeatOptionResponse {
+        private String type;
+        private int interval;
+        private LocalDateTime untilDate;
+
+        public static RepeatOptionResponse from(RepeatOption repeatOption) {
+            return RepeatOptionResponse.builder()
+                    .type(repeatOption.getType().name())
+                    .interval(repeatOption.getInterval())
+                    .untilDate(repeatOption.getUntilDate())
+                    .build();
+        }
+    }
+}
