@@ -1,9 +1,9 @@
 package com.timeplanner.dev.domain.auth.service;
 
 import com.timeplanner.dev.domain.auth.util.VerificationCodeRedisUtil;
-import com.timeplanner.dev.domain.user.dto.UserLoginRequest;
-import com.timeplanner.dev.domain.user.dto.UserLoginResponse;
-import com.timeplanner.dev.domain.user.dto.UserResponse;
+import com.timeplanner.dev.domain.user.dto.request.UserLoginRequest;
+import com.timeplanner.dev.domain.user.dto.response.UserLoginResponse;
+import com.timeplanner.dev.domain.user.dto.response.UserResponse;
 import com.timeplanner.dev.domain.user.service.UserService;
 import com.timeplanner.dev.global.exception.ApiException;
 import com.timeplanner.dev.global.exception.ErrorCode;

@@ -1,4 +1,4 @@
-package com.timeplanner.dev.domain.user.dto;
+package com.timeplanner.dev.domain.user.dto.request;
 
 public record UserLoginRequest(
         String email,

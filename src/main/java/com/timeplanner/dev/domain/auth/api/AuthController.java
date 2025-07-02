@@ -1,8 +1,8 @@
 package com.timeplanner.dev.domain.auth.api;
 
 import com.timeplanner.dev.domain.auth.dto.EmailVerifyRequest;
-import com.timeplanner.dev.domain.user.dto.UserLoginRequest;
-import com.timeplanner.dev.domain.user.dto.UserLoginResponse;
+import com.timeplanner.dev.domain.user.dto.request.UserLoginRequest;
+import com.timeplanner.dev.domain.user.dto.response.UserLoginResponse;
 import com.timeplanner.dev.domain.auth.service.AuthService;
 import com.timeplanner.dev.domain.user.entity.User;
 import com.timeplanner.dev.domain.user.repository.UserRepository;

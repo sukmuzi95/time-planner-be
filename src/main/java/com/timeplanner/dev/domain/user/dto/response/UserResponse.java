@@ -1,4 +1,4 @@
-package com.timeplanner.dev.domain.user.dto;
+package com.timeplanner.dev.domain.user.dto.response;
 
 import com.timeplanner.dev.domain.user.entity.User;
 import lombok.*;

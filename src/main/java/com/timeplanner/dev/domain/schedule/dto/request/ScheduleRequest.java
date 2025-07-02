@@ -1,4 +1,4 @@
-package com.timeplanner.dev.domain.schedule.dto;
+package com.timeplanner.dev.domain.schedule.dto.request;
 
 import java.time.LocalDateTime;
 

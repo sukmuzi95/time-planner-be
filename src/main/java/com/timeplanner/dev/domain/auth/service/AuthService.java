@@ -1,7 +1,7 @@
 package com.timeplanner.dev.domain.auth.service;
 
-import com.timeplanner.dev.domain.user.dto.UserLoginRequest;
-import com.timeplanner.dev.domain.user.dto.UserLoginResponse;
+import com.timeplanner.dev.domain.user.dto.request.UserLoginRequest;
+import com.timeplanner.dev.domain.user.dto.response.UserLoginResponse;
 import com.timeplanner.dev.global.security.jwt.dto.JwtResponse;
 import jakarta.servlet.http.HttpServletResponse;
 

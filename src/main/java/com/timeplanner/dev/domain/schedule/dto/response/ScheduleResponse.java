@@ -1,4 +1,4 @@
-package com.timeplanner.dev.domain.schedule.dto;
+package com.timeplanner.dev.domain.schedule.dto.response;
 
 import com.timeplanner.dev.domain.schedule.entity.RepeatOption;
 import com.timeplanner.dev.domain.schedule.entity.Schedule;

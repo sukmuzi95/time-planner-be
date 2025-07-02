@@ -1,8 +1,8 @@
 package com.timeplanner.dev.domain.user.api;
 
-import com.timeplanner.dev.domain.user.dto.UpdatePasswordRequest;
-import com.timeplanner.dev.domain.user.dto.UpdateUserRequest;
-import com.timeplanner.dev.domain.user.dto.UserResponse;
+import com.timeplanner.dev.domain.user.dto.request.UpdatePasswordRequest;
+import com.timeplanner.dev.domain.user.dto.request.UpdateUserRequest;
+import com.timeplanner.dev.domain.user.dto.response.UserResponse;
 import com.timeplanner.dev.domain.user.service.UserService;
 import com.timeplanner.dev.global.security.auth.UserDetailsImpl;
 import jakarta.validation.Valid;

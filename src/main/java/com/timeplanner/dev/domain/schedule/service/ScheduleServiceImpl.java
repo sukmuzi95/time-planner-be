@@ -1,8 +1,8 @@
 package com.timeplanner.dev.domain.schedule.service;
 
-import com.timeplanner.dev.domain.schedule.dto.RepeatOptionRequest;
-import com.timeplanner.dev.domain.schedule.dto.ScheduleRequest;
-import com.timeplanner.dev.domain.schedule.dto.ScheduleResponse;
+import com.timeplanner.dev.domain.schedule.dto.request.RepeatOptionRequest;
+import com.timeplanner.dev.domain.schedule.dto.request.ScheduleRequest;
+import com.timeplanner.dev.domain.schedule.dto.response.ScheduleResponse;
 import com.timeplanner.dev.domain.schedule.entity.RepeatOption;
 import com.timeplanner.dev.domain.schedule.entity.RepeatType;
 import com.timeplanner.dev.domain.schedule.entity.Schedule;

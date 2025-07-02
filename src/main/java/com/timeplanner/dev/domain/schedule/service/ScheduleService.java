@@ -1,7 +1,7 @@
 package com.timeplanner.dev.domain.schedule.service;
 
-import com.timeplanner.dev.domain.schedule.dto.ScheduleRequest;
-import com.timeplanner.dev.domain.schedule.dto.ScheduleResponse;
+import com.timeplanner.dev.domain.schedule.dto.request.ScheduleRequest;
+import com.timeplanner.dev.domain.schedule.dto.response.ScheduleResponse;
 
 import java.util.List;
 
