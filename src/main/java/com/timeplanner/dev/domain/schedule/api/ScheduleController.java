@@ -19,7 +19,7 @@ public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
-    @PostMapping
+    @PostMapping("/shared")
     public ResponseEntity<Void> createSchedule(
             @RequestBody @Valid ScheduleRequest request,
             @AuthenticationPrincipal UserDetailsImpl userDetails
@@ -29,11 +29,13 @@ public class ScheduleController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/shared")
     public ResponseEntity<List<ScheduleResponse>> getMySchedules(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         Long userId = userDetails.getUser().getId();
         List<ScheduleResponse> schedules = scheduleService.getSchedulesByUserId(userId);
 
         return ResponseEntity.ok(schedules);
     }
+
+
 }

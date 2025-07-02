@@ -46,7 +46,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .startDatetime(request.start())
                 .endDatetime(request.end())
                 .repeatOption(repeatOption)
-                .user(user)
+                .owner(user)
                 .build();
 
         scheduleRepository.save(schedule);
@@ -54,7 +54,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public List<ScheduleResponse> getSchedulesByUserId(Long userId) {
-        return scheduleRepository.findAllByUserId(userId).stream()
+        return scheduleRepository.findAllByOwnerId(userId).stream()
                 .map(ScheduleResponse::from)
                 .toList();
     }

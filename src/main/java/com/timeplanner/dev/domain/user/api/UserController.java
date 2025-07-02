@@ -2,6 +2,7 @@ package com.timeplanner.dev.domain.user.api;
 
 import com.timeplanner.dev.domain.user.dto.UpdatePasswordRequest;
 import com.timeplanner.dev.domain.user.dto.UpdateUserRequest;
+import com.timeplanner.dev.domain.user.dto.UserResponse;
 import com.timeplanner.dev.domain.user.service.UserService;
 import com.timeplanner.dev.global.security.auth.UserDetailsImpl;
 import jakarta.validation.Valid;
@@ -9,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -21,6 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+
+    @GetMapping("/me")
+    public ResponseEntity<UserResponse> getMyProfile(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        UserResponse response = userService.findById(userDetails.getUser().getId());
+
+        return ResponseEntity.ok(response);
+    }
 
     @PutMapping("/me")
     public ResponseEntity<Void> updateProfile(

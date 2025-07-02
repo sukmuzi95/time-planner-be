@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 public class ScheduleResponse {
     private Long id;
     private String title;
+    private Long ownerId;
+    private String ownerName;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private RepeatOptionResponse repeatOption;
@@ -21,6 +23,8 @@ public class ScheduleResponse {
         return ScheduleResponse.builder()
                 .id(schedule.getId())
                 .title(schedule.getTitle())
+                .ownerId(schedule.getOwner().getId())
+                .ownerName(schedule.getOwner().getNickname())
                 .startDateTime(schedule.getStartDatetime())
                 .endDateTime(schedule.getEndDatetime())
                 .repeatOption(schedule.getRepeatOption() != null

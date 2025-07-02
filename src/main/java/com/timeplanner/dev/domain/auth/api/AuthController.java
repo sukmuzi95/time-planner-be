@@ -58,6 +58,10 @@ public class AuthController {
 
     @PostMapping("/email/send")
     public ResponseEntity<Void> sendVerificationCode(@RequestBody EmailVerifyRequest request) {
+        if (userRepository.existsByEmail(request.email())) {
+            throw new IllegalArgumentException("이미 가입된 이메일이에요.");
+        }
+
         authService.sendVerificationCode(request.email());
 
         return ResponseEntity.ok().build();
