@@ -11,6 +11,7 @@ public enum ErrorCode {
     // 400
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
     INVALID_INPUT_VALUE(HttpStatus.BAD_REQUEST, "잘못된 입력값 입니다."),
+    INVALID_USER_ID(HttpStatus.BAD_REQUEST, "잘못된 사용자 ID 입니다."),
 
     // 401
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "인증되지 않은 접근입니다."),
