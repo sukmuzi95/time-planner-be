@@ -30,12 +30,19 @@ public class ScheduleController {
     }
 
     @GetMapping("/shared")
-    public ResponseEntity<List<ScheduleResponse>> getMySchedules(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        Long userId = userDetails.getUser().getId();
-        List<ScheduleResponse> schedules = scheduleService.getSchedulesByUserId(userId);
+    public ResponseEntity<List<ScheduleResponse>> getAllSchedules(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+//        Long userId = userDetails.getUser().getId();
+//        List<ScheduleResponse> schedules = scheduleService.getSchedulesByUserId(userId);
+        List<ScheduleResponse> schedules = scheduleService.getAllSchedules();
 
         return ResponseEntity.ok(schedules);
     }
 
+    @DeleteMapping("/shared/{id}")
+    public ResponseEntity<Void> deleteSchedule(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
+        Long userId = userDetails.getUser().getId();
+        scheduleService.deleteScheduleById(userId, id);
 
+        return ResponseEntity.ok().build();
+    }
 }

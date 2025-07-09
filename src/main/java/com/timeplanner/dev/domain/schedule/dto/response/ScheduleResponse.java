@@ -15,8 +15,8 @@ public class ScheduleResponse {
     private String title;
     private Long ownerId;
     private String ownerName;
-    private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;
+    private LocalDateTime start;
+    private LocalDateTime end;
     private RepeatOptionResponse repeatOption;
 
     public static ScheduleResponse from(Schedule schedule) {
@@ -25,8 +25,8 @@ public class ScheduleResponse {
                 .title(schedule.getTitle())
                 .ownerId(schedule.getOwner().getId())
                 .ownerName(schedule.getOwner().getNickname())
-                .startDateTime(schedule.getStartDatetime())
-                .endDateTime(schedule.getEndDatetime())
+                .start(schedule.getStartDatetime())
+                .end(schedule.getEndDatetime())
                 .repeatOption(schedule.getRepeatOption() != null
                         ? RepeatOptionResponse.from(schedule.getRepeatOption())
                         : null)
