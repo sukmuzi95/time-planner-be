@@ -15,6 +15,7 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -53,7 +54,7 @@ public class AuthServiceImpl implements AuthService {
 
             ResponseCookie refreshCookie = jwtTokenProvider.setRefreshTokenInCookie(refreshToken);
 
-            response.addHeader("Set-Cookie", refreshCookie.toString());
+            response.addHeader(HttpHeaders.SET_COOKIE, refreshCookie.toString());
 
             UserResponse userResponse = UserResponse.of(userService.getUser(request.email()));
 
